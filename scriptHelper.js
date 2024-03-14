@@ -18,12 +18,64 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function validateInput(testInput) {
-    
- }
+    if (testInput === "") {
+        return "Empty";
+    } else if (!isNaN(testInput)) {
+        return "Is a Number";
+    } else {
+        return "Not a Number";
+    }
+}
  
- function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-    
- }
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    let pilotStatus = validateInput(pilot);
+    let copilotStatus = validateInput(copilot);
+    let fuelStatus = validateInput(fuelLevel);
+    let cargoStatus = validateInput(cargoLevel);
+    let launchStatus = document.getElementById('launchStatus');
+    let faultyItems = document.getElementById('faultyItems');
+
+    if (pilotStatus === "Empty" || copilotStatus === "Empty" || fuelStatus === "Empty" || cargoStatus === "Empty") {
+        alert("All fields are required!");
+        return;
+    }
+
+    if (pilotStatus !== "Is a Number" && copilotStatus !== "Is a Number" && fuelStatus !== "Not a Number" && cargoStatus !== "Not a Number") {
+        // All inputs are valid
+        document.getElementById('pilotStatus').textContent = `Pilot ${pilot} Ready`;
+        document.getElementById('copilotStatus').textContent = `Co-pilot ${copilot} Ready`;
+
+        if (fuelLevel < 10000) {
+            launchStatus.textContent = "Shuttle not ready for launch";
+            launchStatus.style.color = "red";
+            document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
+            faultyItems.style.visibility = "visible";
+        } else if (cargoLevel > 10000) {
+            launchStatus.textContent = "Shuttle not ready for launch";
+            launchStatus.style.color = "red";
+            document.getElementById('cargoStatus').textContent = "Cargo mass too high for launch";
+            faultyItems.style.visibility = "visible";
+        } else {
+            launchStatus.textContent = "Shuttle is ready for launch";
+            launchStatus.style.color = "green";
+            faultyItems.style.visibility = "hidden";
+        }
+    } else {
+        console.log("Invalid input detected!");
+        if (pilotStatus === "Is a Number") {
+            console.log("Pilot name cannot be a number.");
+        }
+        if (copilotStatus === "Is a Number") {
+            console.log("Co-pilot name cannot be a number.");
+        }
+        if (fuelStatus === "Not a Number") {
+            console.log("Fuel level must be a number.");
+        }
+        if (cargoStatus === "Not a Number") {
+            console.log("Cargo mass must be a number.");
+        }
+    }
+}
  
  async function myFetch() {
      let planetsReturned;
