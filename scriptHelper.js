@@ -59,11 +59,11 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             launchStatus.style.color = "red";
             document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
             faultyItems.style.visibility = "visible";
-        } else if (cargoLevel > 10000 && fuelLevel < 10000) {
+        } else if (cargoLevel > 10000 && fuelLevel > 10000) {
             launchStatus.textContent = "Shuttle Not Ready for Launch";
             launchStatus.style.color = "red";
             faultyItems.style.visibility = "visible";
-            document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
+            document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
         }
     } else {
         console.log("Invalid input detected!");
