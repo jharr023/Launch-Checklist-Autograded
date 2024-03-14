@@ -27,63 +27,55 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
 }
  
-function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
-    // Validate input
-    let pilotValidation = validateInput(pilot);
-    let copilotValidation = validateInput(copilot);
-    let fuelLevelValidation = validateInput(fuelLevel);
-    let cargoMassValidation = validateInput(cargoMass);
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+    let pilotStatus = validateInput(pilot);
+    let copilotStatus = validateInput(copilot);
+    let fuelStatus = validateInput(fuelLevel);
+    let cargoStatus = validateInput(cargoLevel);
+    let launchStatus = document.getElementById('launchStatus');
+    let faultyItems = document.getElementById('faultyItems');
 
-    // Accessing DOM elements
-    let launchStatusElement = document.getElementById('launchStatus');
-    let faultyItemsElement = document.getElementById('faultyItems');
-    let pilotStatusElement = document.getElementById('pilotStatus');
-    let copilotStatusElement = document.getElementById('copilotStatus');
-    let fuelStatusElement = document.getElementById('fuelStatus');
-    let cargoStatusElement = document.getElementById('cargoStatus');
-
-    // Update shuttle requirements based on validation results
-    if (
-        pilotValidation === "Is a Number" ||
-        copilotValidation === "Is a Number" ||
-        fuelLevelValidation !== "Is a Number" ||
-        cargoMassValidation !== "Is a Number"
-    ) {
-        // If any input is not valid
-        launchStatusElement.textContent = "Awaiting Information Before Launch";
-        launchStatusElement.style.color = "black";
-        faultyItemsElement.style.visibility = "hidden";
+    if (pilotStatus === "Empty" || copilotStatus === "Empty" || fuelStatus === "Empty" || cargoStatus === "Empty") {
+        alert("All fields are required!");
         return;
     }
 
-    // Update pilot and copilot status
-    pilotStatusElement.textContent = `Pilot: ${pilot}.`;
-    copilotStatusElement.textContent = `Co-Pilot: ${copilot}.`;
+    if (pilotStatus !== "Is a Number" && copilotStatus !== "Is a Number" && fuelStatus !== "Not a Number" && cargoStatus !== "Not a Number") {
+        // All inputs are valid
+        document.getElementById('pilotStatus').textContent = `Pilot ${pilot} is ready for launch`;
+        document.getElementById('copilotStatus').textContent = `Co-pilot ${copilot} is ready for launch`;
 
-    // Check fuel level
-    if (fuelLevel < 10000) {
-        fuelStatusElement.textContent = "Fuel level too low for launch";
-        launchStatusElement.textContent = "Shuttle not ready for launch";
-        launchStatusElement.style.color = "red";
-        faultyItemsElement.style.visibility = "visible";
-        return;
+        if (fuelLevel < 10000) {
+            launchStatus.textContent = "Shuttle Not Ready for Launch";
+            launchStatus.style.color = "red";
+            document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
+            faultyItems.style.visibility = "visible";
+        } else if (cargoLevel > 10000) {
+            launchStatus.textContent = "Shuttle Not Ready for Launch";
+            launchStatus.style.color = "red";
+            document.getElementById('cargoStatus').textContent = "Cargo mass too high for launch";
+            faultyItems.style.visibility = "visible";
+        } else {
+            launchStatus.textContent = "Shuttle is ready for launch";
+            launchStatus.style.color = "green";
+            faultyItems.style.visibility = "hidden";
+        }
+    } else {
+        console.log("Invalid input detected!");
+        if (pilotStatus === "Is a Number") {
+            console.log("Pilot name cannot be a number.");
+        }
+        if (copilotStatus === "Is a Number") {
+            console.log("Co-pilot name cannot be a number.");
+        }
+        if (fuelStatus === "Not a Number") {
+            console.log("Fuel level must be a number.");
+        }
+        if (cargoStatus === "Not a Number") {
+            console.log("Cargo mass must be a number.");
+        }
     }
-
-    // Check cargo mass
-    if (cargoMass > 10000) {
-        cargoStatusElement.textContent = "Cargo mass too high for launch";
-        launchStatusElement.textContent = "Shuttle not ready for launch";
-        launchStatusElement.style.color = "red";
-        faultyItemsElement.style.visibility = "visible";
-        return;
-    }
-
-    // Shuttle is ready for launch
-    launchStatusElement.textContent = "Shuttle is ready for launch";
-    launchStatusElement.style.color = "green";
-    faultyItemsElement.style.visibility = "hidden";
 }
-
 module.exports.formSubmission = formSubmission;
 
  
