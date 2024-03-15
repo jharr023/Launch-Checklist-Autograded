@@ -5,7 +5,7 @@ const { myFetch } = require("./scriptHelper");
 window.addEventListener("load", function() {
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse = myFetch();
+    let listedPlanetsResponse = myFetch(planetsResponse);
 
     // Once the data is fetched, continue execution
     listedPlanetsResponse.then(function(result) {
