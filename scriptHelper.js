@@ -85,11 +85,18 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     }
 }
  
-function myFetch() {
-    return Promise.resolve(planetsResponse);
+async function myFetch() {
+    try {
+        // Fetch the list of planets from the API or any source
+        const response = await fetch('https://handlers.education.launchcode.org/static/planets.json');
+        const data = await response.json();
+        
+        return data; // Return the fetched list of planets
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
 }
-
-module.exports.myFetch = myFetch;
 
 function pickPlanet(planets) {
     const randomIndex = Math.floor(Math.random() * planets.length);
