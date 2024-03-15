@@ -42,8 +42,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         return "Is a Number";
     }
 }
- 
-/* function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+
+/*
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let pilotStatus = validateInput(pilot);
     let copilotStatus = validateInput(copilot);
     let fuelStatus = validateInput(fuelLevel);
@@ -97,7 +98,8 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             console.log("Cargo mass must be a number.");
         }
     }
-} */
+}
+*/
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let pilotStatus = validateInput(pilot);
@@ -106,6 +108,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let cargoStatus = validateInput(cargoLevel);
     let launchStatus = document.getElementById('launchStatus');
     let faultyItems = document.getElementById('faultyItems');
+
+    faultyItems.style.visibility = "visible"; // Set visibility to "visible"
 
     if (pilotStatus === "Empty" || copilotStatus === "Empty" || fuelStatus === "Empty" || cargoStatus === "Empty") {
         alert("All fields are required!");
@@ -130,11 +134,9 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             } else {
                 document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
             }
-            faultyItems.style.visibility = "visible";
         } else {
             launchStatus.textContent = "Shuttle is Ready for Launch";
             launchStatus.style.color = "green";
-            faultyItems.style.visibility = "visible";
             document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
             document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
         }
