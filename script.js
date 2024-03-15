@@ -1,7 +1,5 @@
 const { myFetch, pickPlanet, addDestinationInfo, formSubmission } = require("./scriptHelper");
 
-const { myFetch, pickPlanet, addDestinationInfo, formSubmission } = require("./scriptHelper");
-
 window.addEventListener("load", function() {
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
@@ -29,4 +27,4 @@ window.addEventListener("load", function() {
     }).then(function () {
         console.log(listedPlanets);
     });
-});
+}); 
