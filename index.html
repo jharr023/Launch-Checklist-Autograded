@@ -10,64 +10,27 @@
     <body>
         <h1>Launch Checklist Form</h1>
         <div id="missionTarget" data-testid="missionTarget">
-            <!-- Fetch some planetary data -->
-            <script>
-                function pickPlanet(planets) {
-                    const randomIndex = Math.floor(Math.random() * planets.length);
-                    return planets[randomIndex];
-                }
-        
-                window.addEventListener("load", function() {
-                    let listedPlanets;
-        
-                    // Fetch the list of planets
-                    fetch('https://handlers.education.launchcode.org/static/planets.json')
-                    .then(response => response.json())
-                    .then(data => {
-                        // Store the fetched list of planets
-                        listedPlanets = data;
-        
-                        // Select a random planet
-                        const randomPlanet = pickPlanet(listedPlanets);
-        
-                        // Display the mission target information
-                        const missionTargetDiv = document.getElementById('missionTarget');
-                        missionTargetDiv.innerHTML = `
-                            <h2>Mission Destination</h2>
-                            <ol>
-                                <li>Name: ${randomPlanet.name}</li>
-                                <li>Diameter: ${randomPlanet.diameter}</li>
-                                <li>Star: ${randomPlanet.star}</li>
-                                <li>Distance from Earth: ${randomPlanet.distance}</li>
-                                <li>Number of Moons: ${randomPlanet.moons}</li>
-                            </ol>
-                            <img src="${randomPlanet.image}">
-                        `;
-                    })
-                    .catch(error => {
-                        // Handle errors if the fetch request fails
-                        console.error('Error fetching data:', error);
-                    });
-                });
-            </script>
-        </div>  
+            <!-- Mission target information will be displayed here -->
+        </div>
+    
         <div id="launchForm">
             <form data-testid="testForm">
                 <div class="formField">
-                    <label>Pilot Name <input type="text" name="pilotName" id="pilotName"/></label>
+                    <label>Pilot Name <input type="text" name="pilotName" id="pilotName" /></label>
                 </div>
                 <div class="formField">
-                    <label>Co-pilot Name <input type="text" name="copilotName"/></label>
+                    <label>Co-pilot Name <input type="text" name="copilotName" id="copilotName" /></label>
                 </div>
                 <div class="formField">
-                    <label>Fuel Level (L) <input type="text" name="fuelLevel"/></label> 
+                    <label>Fuel Level (L) <input type="text" name="fuelLevel" id="fuelLevel" /></label>
                 </div>
                 <div class="formField">
-                    <label>Cargo Mass (kg) <input type="text" name="cargoMass"/></label>
+                    <label>Cargo Mass (kg) <input type="text" name="cargoMass" id="cargoMass" /></label>
                 </div>
                 <button id="formSubmit">Submit</button>
             </form>
         </div>
+    
         <div id="launchStatusCheck">
             <h2 id="launchStatus" data-testid="launchStatus">Awaiting Information Before Launch</h2>
             <div id="faultyItems" style="visibility: hidden">
@@ -79,5 +42,36 @@
                 </ol>
             </div>
         </div>
+    
+        <!-- Script tags to include JavaScript code -->
+    <script src="scriptHelper.js"></script>
+    <script>
+        window.addEventListener("load", async function() {
+            const missionTargetDiv = document.getElementById('missionTarget');
+
+            try {
+                // Fetch the list of planets
+                const planets = await myFetch();
+
+                // Select a random planet from the list
+                const randomPlanet = pickPlanet(planets);
+
+                // Display the mission target information within the HTML
+                missionTargetDiv.innerHTML = `
+                    <h2>Mission Destination</h2>
+                    <ol>
+                        <li>Name: ${randomPlanet.name}</li>
+                        <li>Diameter: ${randomPlanet.diameter}</li>
+                        <li>Star: ${randomPlanet.star}</li>
+                        <li>Distance from Earth: ${randomPlanet.distance}</li>
+                        <li>Number of Moons: ${randomPlanet.moons}</li>
+                    </ol>
+                    <img src="${randomPlanet.image}">
+                `;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    </script>
     </body>
 </html>
