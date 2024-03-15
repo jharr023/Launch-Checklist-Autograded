@@ -1,40 +1,9 @@
-// Write your JavaScript code here!
-
-const { myFetch } = require("./scriptHelper");
-
-function myFetch() {
-    return Promise.resolve(planetsResponse);
-}
+const { myFetch, pickPlanet, addDestinationInfo, formSubmission } = require("./scriptHelper");
 
 window.addEventListener("load", function() {
-    // Define variables to store the fetched planets and the selected planet
-    let listedPlanets;
-    let selectedPlanet;
-
-    // Call myFetch() to fetch the list of planets
-    myFetch().then(function (result) {
-        listedPlanets = result;
-
-        // Use pickPlanet() to select a random planet from the list
-        selectedPlanet = pickPlanet(listedPlanets);
-
-        // Use addDestinationInfo() to add the information of the selected planet to the mission target
-        addDestinationInfo(
-            document,
-            selectedPlanet.name,
-            selectedPlanet.diameter,
-            selectedPlanet.star,
-            selectedPlanet.distance,
-            selectedPlanet.moons,
-            selectedPlanet.image
-        );
-    });
-});
-
-/*  window.addEventListener("load", function() {
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse = myFetch(planetsResponse);
+    let listedPlanetsResponse = myFetch();
 
     // Once the data is fetched, continue execution
     listedPlanetsResponse.then(function(result) {
@@ -58,4 +27,4 @@ window.addEventListener("load", function() {
     }).then(function () {
         console.log(listedPlanets);
     });
-}); */
+});
