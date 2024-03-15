@@ -93,6 +93,10 @@ async function myFetch(planetsResponse) {
     }
 }
 
+module.exports = {
+    myFetch
+};
+
 function pickPlanet(planets) {
     const randomIndex = Math.floor(Math.random() * planets.length);
     return planets[randomIndex];
