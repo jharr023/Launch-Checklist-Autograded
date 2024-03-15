@@ -77,6 +77,10 @@
                     formSubmission(
                         document,
                         // Pass any other required parameters here
+                        document.getElementById('pilotName').value,
+                        document.getElementById('copilotName').value,
+                        document.getElementById('fuelLevel').value,
+                        document.getElementById('cargoMass').value
                     );
                 });
             } catch (error) {
