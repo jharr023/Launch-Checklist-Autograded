@@ -43,7 +43,6 @@ function validateInput(input) {
     }
 }
 
-
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     // Validate input data for pilot, co-pilot, fuel, and cargo
     let pilotStatus = validateInput(pilot);
