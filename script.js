@@ -1,19 +1,19 @@
 const { myFetch, pickPlanet, addDestinationInfo, formSubmission } = require("./scriptHelper");
 
+const { myFetch, pickPlanet, addDestinationInfo, formSubmission } = require("./scriptHelper");
+
 window.addEventListener("load", function() {
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse = myFetch(); // Assuming myFetch() returns a promise that resolves with the list of planets
+    let listedPlanetsResponse = myFetch();
 
     // Once the data is fetched, continue execution
     listedPlanetsResponse.then(function(result) {
         listedPlanets = result;
         console.log(listedPlanets);
 
-        // Select a random planet from the list of planets
-        const randomPlanet = pickPlanet(listedPlanets);
-
-        // Display the information of the selected planet
+        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+        const randomPlanet = pickPlanet(listedPlanets); // Call pickPlanet() to select a random planet
         addDestinationInfo(
             document,
             randomPlanet.name,
@@ -22,9 +22,11 @@ window.addEventListener("load", function() {
             randomPlanet.distance,
             randomPlanet.moons,
             randomPlanet.imageUrl
-        );
+        ); // Call addDestinationInfo() to display the selected planet's information
 
-        // Reload the page to see the mission target information
-        location.reload();
+        // Call formSubmission() with sample data to simulate form submission
+        formSubmission(document, list, "Pilot Name", "Co-pilot Name", 10000, 5000);
+    }).then(function () {
+        console.log(listedPlanets);
     });
 });
