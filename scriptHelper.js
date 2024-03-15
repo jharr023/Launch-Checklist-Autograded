@@ -1,7 +1,9 @@
-const { planetsResponse } = require('C:/Users/kaise/OneDrive/Desktop/LaunchCode/Launch Checklist/Launch-Checklist-Autograded/__tests__/grading.test.js');
+//const { planetsResponse } = require('C:/Users/kaise/OneDrive/Desktop/LaunchCode/Launch Checklist/Launch-Checklist-Autograded/__tests__/grading.test.js');
 // Write your helper functions here!
 
-require('cross-fetch/polyfill');
+
+import ('cross-fetch/polyfill');
+
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     const missionTargetDiv = document.getElementById('missionTarget');
@@ -71,6 +73,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     faultyItems.style.visibility = "visible";
 
     // Check if any required fields are empty
+
+    console.log("Pilot Status:", pilotStatus);
+console.log("Co-pilot Status:", copilotStatus);
+console.log("Fuel Status:", fuelStatus);
+console.log("Cargo Status:", cargoStatus);
+
     if (pilotStatus === "Empty" || copilotStatus === "Empty" || fuelStatus === "Empty" || cargoStatus === "Empty") {
         alert("All fields are required!");
         return;
