@@ -25,7 +25,7 @@ window.addEventListener("load", function() {
         ); // Call addDestinationInfo() to display the selected planet's information
 
         // Call formSubmission() with sample data to simulate form submission
-        formSubmission(document, list, "Pilot Name", "Co-pilot Name", 10000, 5000);
+        //formSubmission(document, list, "Pilot Name", "Co-pilot Name", 10000, 5000);
     }).then(function () {
         console.log(listedPlanets);
     });
