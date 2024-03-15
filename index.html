@@ -11,6 +11,45 @@
         <h1>Launch Checklist Form</h1>
         <div id="missionTarget" data-testid="missionTarget">
             <!-- Fetch some planetary data -->
+            <script>
+                function pickPlanet(planets) {
+                    const randomIndex = Math.floor(Math.random() * planets.length);
+                    return planets[randomIndex];
+                }
+        
+                window.addEventListener("load", function() {
+                    let listedPlanets;
+        
+                    // Fetch the list of planets
+                    fetch('https://handlers.education.launchcode.org/static/planets.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Store the fetched list of planets
+                        listedPlanets = data;
+        
+                        // Select a random planet
+                        const randomPlanet = pickPlanet(listedPlanets);
+        
+                        // Display the mission target information
+                        const missionTargetDiv = document.getElementById('missionTarget');
+                        missionTargetDiv.innerHTML = `
+                            <h2>Mission Destination</h2>
+                            <ol>
+                                <li>Name: ${randomPlanet.name}</li>
+                                <li>Diameter: ${randomPlanet.diameter}</li>
+                                <li>Star: ${randomPlanet.star}</li>
+                                <li>Distance from Earth: ${randomPlanet.distance}</li>
+                                <li>Number of Moons: ${randomPlanet.moons}</li>
+                            </ol>
+                            <img src="${randomPlanet.image}">
+                        `;
+                    })
+                    .catch(error => {
+                        // Handle errors if the fetch request fails
+                        console.error('Error fetching data:', error);
+                    });
+                });
+            </script>
         </div>  
         <div id="launchForm">
             <form data-testid="testForm">
