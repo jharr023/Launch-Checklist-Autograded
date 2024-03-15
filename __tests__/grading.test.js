@@ -163,7 +163,7 @@ describe('Test student work on helper functions', () => {
   });
 
   test("Student is fetching list of planets", async function() {
-      const result = await studentFunctions.myFetch();
+      const result = await studentFunctions.myFetch(planetsResponse);
       expect(result).toEqual(planetsResponse);
    });
 
