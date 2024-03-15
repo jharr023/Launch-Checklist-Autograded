@@ -49,10 +49,10 @@ function validateInput(input) {
     }
     if (input.trim() === "") {
         return "Empty"; // Input is empty
-    } else if (!isNaN(parseFloat(input))) {
-        return "Is a Number"; // Input is a valid number
-    } else {
+    } else if (isNaN(parseFloat(input))) {
         return "Not a Number"; // Input is not a valid number
+    } else {
+        return "Is a Number"; // Input is a valid number
     }
 }
 
@@ -77,36 +77,37 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     }
 
     // Check if all inputs are valid
-    //if (pilotStatus !== "Is a Number" && copilotStatus !== "Is a Number" && fuelStatus !== "Not a Number" && cargoStatus !== "Not a Number") {
-        if (pilotStatus !== "Is a Number" && copilotStatus !== "Is a Number" && fuelStatus === "Is a Number" && cargoStatus === "Is a Number") {
-        // All inputs are valid
+if (pilotStatus !== "Is a Number" && copilotStatus !== "Is a Number" && fuelStatus === "Is a Number" && cargoStatus === "Is a Number") {
+    // All inputs are valid
 
-        // Update pilot and co-pilot status
-        document.getElementById('pilotStatus').textContent = `Pilot ${pilot} is ready for launch`;
-        document.getElementById('copilotStatus').textContent = `Co-pilot ${copilot} is ready for launch`;
+    // Update pilot and co-pilot status
+    document.getElementById('pilotStatus').textContent = `Pilot ${pilot} is ready for launch`;
+    document.getElementById('copilotStatus').textContent = `Co-pilot ${copilot} is ready for launch`;
+    document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
+    
+    // Check fuel and cargo levels
+    if (fuelLevel < 10000) {
+        // Shuttle not ready for launch due to low fuel
+        launchStatus.textContent = "Shuttle Not Ready for Launch";
+        launchStatus.style.color = "red";
+        document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
+    } else if (cargoMass > 10000) {
+        // Shuttle not ready for launch due to heavy cargo
+        launchStatus.textContent = "Shuttle Not Ready for Launch";
+        launchStatus.style.color = "red";
+        document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
+        document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
+    } else {
+        // Shuttle is ready for launch
+        launchStatus.textContent = "Shuttle is Ready for Launch";
+        launchStatus.style.color = "green";
+        document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
+        document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
+    }
 
-        // Check fuel and cargo levels
-        if (fuelLevel < 10000) {
-            // Shuttle not ready for launch due to low fuel
-            launchStatus.textContent = "Shuttle Not Ready for Launch";
-            launchStatus.style.color = "red";
-            document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
-        } else if (cargoMass > 10000 && fuelLevel >= 10000) {
-            // Shuttle not ready for launch due to heavy cargo
-            launchStatus.textContent = "Shuttle Not Ready for Launch";
-            launchStatus.style.color = "red";
-            document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
-            document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
-        } else {
-            // Shuttle is ready for launch
-            launchStatus.textContent = "Shuttle is Ready for Launch";
-            launchStatus.style.color = "green";
-            document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
-            document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
-        }
     } else {
         // Invalid input detected
-        document.getElementById('launchStatus').textContent = "Awaiting Information Before Launch";
+        launchStatus.textContent = "Awaiting Information Before Launch";
         launchStatus.style.color = "black"; // Reset color
         console.log("Invalid input detected!");
         if (pilotStatus === "Is a Number") {
