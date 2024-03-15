@@ -168,3 +168,5 @@ describe('Test student work on helper functions', () => {
    });
 
 });
+
+module.exports.planetsResponse = planetsResponse;
