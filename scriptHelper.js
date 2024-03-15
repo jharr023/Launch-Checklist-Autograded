@@ -83,7 +83,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     }
 }
  
-async function myFetch() {
+async function myFetch(planetsResponse) {
     try {
         // Return the pre-defined list of planets
         return planetsResponse;
