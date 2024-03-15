@@ -56,12 +56,12 @@ function validateInput(input) {
     }
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     // Validate input data for pilot, co-pilot, fuel, and cargo
     let pilotStatus = validateInput(pilot);
     let copilotStatus = validateInput(copilot);
     let fuelStatus = validateInput(fuelLevel);
-    let cargoStatus = validateInput(cargoLevel);
+    let cargoStatus = validateInput(cargoMass);
 
     // Get the launch status and faulty items elements
     let launchStatus = document.getElementById('launchStatus');
@@ -90,7 +90,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             launchStatus.textContent = "Shuttle Not Ready for Launch";
             launchStatus.style.color = "red";
             document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
-        } else if (cargoLevel > 10000) {
+        } else if (cargoMass > 10000) {
             // Shuttle not ready for launch due to heavy cargo
             launchStatus.textContent = "Shuttle Not Ready for Launch";
             launchStatus.style.color = "red";
