@@ -84,7 +84,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         }
     }
 }
- 
+
 async function myFetch() {
     try {
         // Fetch the list of planets from the API or any source
