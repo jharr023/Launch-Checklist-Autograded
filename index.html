@@ -1,92 +1,93 @@
 <!DOCTYPE>
 <html>
-    <head>
-        <title>Launch Checklist</title>
-        <link rel = "stylesheet" type = "text/css" href = "styles.css" />
-        <script src = "scriptHelper.js"></script>
-        <!-- <script src = "script.js"></script> -->
-        <script src = "bundle.js"></script>
-    </head>
-    <body>
-        <h1>Launch Checklist Form</h1>
-        <div id="missionTarget" data-testid="missionTarget">
-            <!-- Fetch some planetary data -->
-            
-        </div>
+<head>
+    <title>Launch Checklist</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="scriptHelper.js"></script>
+    <script src="bundle.js"></script>
+</head>
+<body>
+    <h1>Launch Checklist Form</h1>
+    <div id="missionTarget" data-testid="missionTarget">
+        <!-- Fetch some planetary data -->
+        <script>
+            window.addEventListener("load", async function() {
+                const missionTargetDiv = document.getElementById('missionTarget');
     
-        <div id="launchForm">
-            <form data-testid="testForm">
-                <div class="formField">
-                    <label>Pilot Name <input type="text" name="pilotName" id="pilotName" /></label>
-                </div>
-                <div class="formField">
-                    <label>Co-pilot Name <input type="text" name="copilotName" id="copilotName" /></label>
-                </div>
-                <div class="formField">
-                    <label>Fuel Level (L) <input type="text" name="fuelLevel" id="fuelLevel" /></label>
-                </div>
-                <div class="formField">
-                    <label>Cargo Mass (kg) <input type="text" name="cargoMass" id="cargoMass" /></label>
-                </div>
-                <button id="formSubmit">Submit</button>
-            </form>
-        </div>
+                try {
+                    // Fetch the list of planets
+                    const planets = await myFetch();
     
- <div id="launchStatusCheck">
-            <h2 id="launchStatus" data-testid="launchStatus">Awaiting Information Before Launch</h2>
-            <div id="faultyItems" style="visibility: hidden">
-                <ol>
-                    <li id="pilotStatus" data-testid="pilotStatus">Pilot Ready</li>
-                    <li id="copilotStatus" data-testid="copilotStatus">Co-pilot Ready</li>
-                    <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
-                    <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
-                </ol>
-            </div>
-        </div> 
+                    // Select a random planet from the list
+                    const randomPlanet = pickPlanet(planets);
+    
+                    // Display the mission target information within the HTML
+                    missionTargetDiv.innerHTML = `
+                        <h2>Mission Destination</h2>
+                        <ol>
+                            <li>Name: ${randomPlanet.name}</li>
+                            <li>Diameter: ${randomPlanet.diameter}</li>
+                            <li>Star: ${randomPlanet.star}</li>
+                            <li>Distance from Earth: ${randomPlanet.distance}</li>
+                            <li>Number of Moons: ${randomPlanet.moons}</li>
+                        </ol>
+                        <img src="${randomPlanet.image}">
+                    `;
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        </script>
+    </div>
 
-        <!-- Script tags to include JavaScript code -->
-        <script src="scriptHelper.js"></script>
-            <script>
-                window.addEventListener("load", async function() {
-                    const missionTargetDiv = document.getElementById('missionTarget');
-        
-                    try {
-                        // Fetch the list of planets
-                        const planets = await myFetch();
-        
-                        // Select a random planet from the list
-                        const randomPlanet = pickPlanet(planets);
-        
-                        // Display the mission target information within the HTML
-                        missionTargetDiv.innerHTML = `
-                            <h2>Mission Destination</h2>
-                            <ol>
-                                <li>Name: ${randomPlanet.name}</li>
-                                <li>Diameter: ${randomPlanet.diameter}</li>
-                                <li>Star: ${randomPlanet.star}</li>
-                                <li>Distance from Earth: ${randomPlanet.distance}</li>
-                                <li>Number of Moons: ${randomPlanet.moons}</li>
-                            </ol>
-                            <img src="${randomPlanet.image}">
-                        `;
-                    // Add event listener to the form submit button
-                const formSubmitButton = document.getElementById('formSubmit');
-                formSubmitButton.addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent default form submission behavior
-                    // Call the formSubmission function passing the necessary parameters
-                    formSubmission(
-                        document,
-                        // Pass any other required parameters here
-                        document.getElementById('pilotName').value,
-                        document.getElementById('copilotName').value,
-                        document.getElementById('fuelLevel').value,
-                        document.getElementById('cargoMass').value
-                    );
-                });
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
+    <div id="launchForm">
+        <form data-testid="testForm">
+            <div class="formField">
+                <label>Pilot Name <input type="text" name="pilotName" id="pilotName" /></label>
+            </div>
+            <div class="formField">
+                <label>Co-pilot Name <input type="text" name="copilotName" id="copilotName" /></label>
+            </div>
+            <div class="formField">
+                <label>Fuel Level (L) <input type="text" name="fuelLevel" id="fuelLevel" /></label>
+            </div>
+            <div class="formField">
+                <label>Cargo Mass (kg) <input type="text" name="cargoMass" id="cargoMass" /></label>
+            </div>
+            <button id="formSubmit">Submit</button>
+        </form>
+    </div>
+
+    <div id="launchStatusCheck">
+        <h2 id="launchStatus" data-testid="launchStatus">Awaiting Information Before Launch</h2>
+        <div id="faultyItems" style="visibility: hidden">
+            <ol>
+                <li id="pilotStatus" data-testid="pilotStatus">Pilot Ready</li>
+                <li id="copilotStatus" data-testid="copilotStatus">Co-pilot Ready</li>
+                <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
+                <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Script tags to include JavaScript code -->
+    <script>
+        window.addEventListener("DOMContentLoaded", function() {
+            const formSubmitButton = document.getElementById('formSubmit');
+            formSubmitButton.addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+                // Call the formSubmission function passing the necessary parameters
+                formSubmission(
+                    document,
+                    // Pass any other required parameters here
+                    document.getElementById('pilotName').value,
+                    document.getElementById('copilotName').value,
+                    document.getElementById('fuelLevel').value,
+                    document.getElementById('cargoMass').value
+                );
+            });
         });
     </script>
-    </body>
+
+</body>
 </html>
