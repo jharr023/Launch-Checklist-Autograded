@@ -3,7 +3,6 @@ const { planetsResponse } = require('C:/Users/kaise/OneDrive/Desktop/LaunchCode/
 
 require('cross-fetch/polyfill');
 
-
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     const missionTargetDiv = document.getElementById('missionTarget');
     missionTargetDiv.innerHTML = `
@@ -18,6 +17,21 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         <img src="${imageUrl}">
     `;
 }
+
+/* function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
+    const missionTargetDiv = document.getElementById('missionTarget');
+    missionTargetDiv.innerHTML = `
+        <h2>Mission Destination</h2>
+        <ol>
+            <li>Name: ${name}</li>
+            <li>Diameter: ${diameter}</li>
+            <li>Star: ${star}</li>
+            <li>Distance from Earth: ${distance}</li>
+            <li>Number of Moons: ${moons}</li>
+        </ol>
+        <img src="${imageUrl}">
+    `;
+} */
  
  function validateInput(testInput) {
     if (testInput === "") {
