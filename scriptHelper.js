@@ -1,7 +1,7 @@
 // Write your helper functions here!
 
 require('cross-fetch/polyfill');
-const { planetsResponse } = require('./grading.test.js');
+const { planetsResponse } = require('C:/Users/kaise/OneDrive/Desktop/LaunchCode/Launch Checklist/Launch-Checklist-Autograded/__tests__/grading.test.js');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     const missionTargetDiv = document.getElementById('missionTarget');
