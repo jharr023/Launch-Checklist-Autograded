@@ -2,32 +2,18 @@
 
 const { myFetch } = require("./scriptHelper");
 
-w/*indow.addEventListener("load", function() {
-
-    let listedPlanets = myFetch();
-    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse;
-    listedPlanetsResponse.then(function (result) {
-        listedPlanets = result;
-        console.log(listedPlanets);
-    }).then(function () {
-        console.log(listedPlanets);
-        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
-    })
-    
- });*/
- window.addEventListener("load", function() {
+window.addEventListener("load", function() {
     let listedPlanets;
     // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-    let listedPlanetsResponse = myFetch(); // Step 1: Set listedPlanetsResponse equal to the value returned by calling myFetch()
+    let listedPlanetsResponse = myFetch();
 
+    // Once the data is fetched, continue execution
     listedPlanetsResponse.then(function(result) {
         listedPlanets = result;
+        console.log(listedPlanets);
 
-        // Step 3: Use pickPlanet() to select a random planet from listedPlanets
-        const randomPlanet = pickPlanet(listedPlanets);
-
-        // Step 4: Pass the information of the selected planet to addDestinationInfo() to update the mission target div
+        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+        const randomPlanet = pickPlanet(listedPlanets); // Call pickPlanet() to select a random planet
         addDestinationInfo(
             document,
             randomPlanet.name,
@@ -36,8 +22,8 @@ w/*indow.addEventListener("load", function() {
             randomPlanet.distance,
             randomPlanet.moons,
             randomPlanet.imageUrl
-        );
+        ); // Call addDestinationInfo() to display the selected planet's information
     }).then(function () {
-        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+        console.log(listedPlanets);
     });
 });
