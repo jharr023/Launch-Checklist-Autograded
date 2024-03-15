@@ -83,9 +83,9 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     }
 }
  
-async function myFetch(planetsResponse) {
+async function myFetch() {
     try {
-        // Return the pre-defined list of planets
+        // Return the predefined list of planets
         return planetsResponse;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -93,9 +93,7 @@ async function myFetch(planetsResponse) {
     }
 }
 
-module.exports = {
-    myFetch
-};
+module.exports.myFetch = myFetch;
 
 function pickPlanet(planets) {
     const randomIndex = Math.floor(Math.random() * planets.length);
