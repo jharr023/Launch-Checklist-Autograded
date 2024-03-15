@@ -63,7 +63,7 @@ const planetsResponse = [
        "moons": 0
    }
  ];
-
+ module.exports.planetsResponse = planetsResponse;
 
 describe('Test student work on helper functions', () => {
 
@@ -169,4 +169,3 @@ describe('Test student work on helper functions', () => {
 
 });
 
-module.exports.planetsResponse = planetsResponse;
