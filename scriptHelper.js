@@ -85,17 +85,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     }
 }
  
-async function myFetch() {
-    try {
-        // Fetch the list of planets from the API or any source
-        const response = await fetch('URL_TO_FETCH_PLANETS_DATA'); // Replace 'URL_TO_FETCH_PLANETS_DATA' with the actual URL
-        const data = await response.json();
-        
-        return data; // Return the fetched list of planets
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        throw error;
-    }
+function myFetch() {
+    return Promise.resolve(planetsResponse);
 }
 
 module.exports.myFetch = myFetch;
