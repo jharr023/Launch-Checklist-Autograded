@@ -42,7 +42,6 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         return "Is a Number";
     }
 }
-
 /*
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     // Validate input data for pilot, co-pilot, fuel, and cargo
@@ -102,18 +101,20 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         }
     } else {
         // Invalid input detected
+        document.getElementById('launchStatus').textContent = "Awaiting Information Before Launch";
+        launchStatus.style.color = "black"; // Reset color
         console.log("Invalid input detected!");
         if (pilotStatus === "Is a Number") {
-            console.log("Pilot name cannot be a number.");
+            document.getElementById('pilotStatus').textContent = "Pilot name cannot be a number.";
         }
         if (copilotStatus === "Is a Number") {
-            console.log("Co-pilot name cannot be a number.");
+            document.getElementById('copilotStatus').textContent = "Co-pilot name cannot be a number.";
         }
         if (fuelStatus === "Not a Number") {
-            console.log("Fuel level must be a number.");
+            document.getElementById('fuelStatus').textContent = "Fuel level must be a number.";
         }
         if (cargoStatus === "Not a Number") {
-            console.log("Cargo mass must be a number.");
+            document.getElementById('cargoStatus').textContent = "Cargo mass must be a number.";
         }
     }
 }
@@ -148,30 +149,21 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
         document.getElementById('copilotStatus').textContent = `Co-pilot ${copilot} is ready for launch`;
 
         // Check fuel and cargo levels
-        if (fuelLevel < 10000 || cargoLevel > 10000) {
-            // Shuttle not ready for launch
+        if (fuelLevel < 10000) {
+            // Shuttle not ready for launch due to low fuel
             launchStatus.textContent = "Shuttle Not Ready for Launch";
             launchStatus.style.color = "red";
-
-            // Update fuel status
-            if (fuelLevel < 10000) {
-                document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
-            } else {
-                document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
-            }
-
-            // Update cargo status
-            if (cargoLevel > 10000) {
-                document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
-            } else {
-                document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
-            }
+            document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
+        } else if (cargoLevel > 10000) {
+            // Shuttle not ready for launch due to heavy cargo
+            launchStatus.textContent = "Shuttle Not Ready for Launch";
+            launchStatus.style.color = "red";
+            document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
+            document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
         } else {
             // Shuttle is ready for launch
             launchStatus.textContent = "Shuttle is Ready for Launch";
             launchStatus.style.color = "green";
-
-            // Update fuel and cargo status
             document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
             document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
         }
