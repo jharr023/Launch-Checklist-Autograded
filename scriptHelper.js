@@ -18,26 +18,24 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     `;
 }
 
-/* function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-    const missionTargetDiv = document.getElementById('missionTarget');
-    missionTargetDiv.innerHTML = `
-        <h2>Mission Destination</h2>
-        <ol>
-            <li>Name: ${name}</li>
-            <li>Diameter: ${diameter}</li>
-            <li>Star: ${star}</li>
-            <li>Distance from Earth: ${distance}</li>
-            <li>Number of Moons: ${moons}</li>
-        </ol>
-        <img src="${imageUrl}">
-    `;
-} */
- 
+
+ /*
 function validateInput(input) {
     if (String(input).trim() === "") {
         return "Empty"; // Input is empty
     } else if (isNaN(input)) {
         return "Not a Number"; // Input is not a number
+    } else {
+        return "Is a Number"; // Input is a valid number
+    }
+}
+*/
+
+function validateInput(input) {
+    if (String(input).trim() === "") {
+        return "Empty"; // Input is empty
+    } else if (isNaN(parseFloat(input))) {
+        return "Not a Number"; // Input is not a valid number
     } else {
         return "Is a Number"; // Input is a valid number
     }
@@ -50,6 +48,9 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     let fuelStatus = validateInput(fuelLevel);
     let cargoStatus = validateInput(cargoLevel);
     
+    console.log("Fuel level input:", fuelLevel);
+    console.log("Parsed fuel level:", parseFloat(fuelLevel));
+
     // Get the launch status and faulty items elements
     let launchStatus = document.getElementById('launchStatus');
     let faultyItems = document.getElementById('faultyItems');
