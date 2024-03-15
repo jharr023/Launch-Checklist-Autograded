@@ -60,9 +60,11 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
             }
             faultyItems.style.visibility = "visible";
         } else {
-            launchStatus.textContent = "Shuttle is ready for launch";
+            launchStatus.textContent = "Shuttle is Ready for Launch";
             launchStatus.style.color = "green";
-            faultyItems.style.visibility = "hidden";
+            faultyItems.style.visibility = "visible";
+            document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
+            document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
         }
     } else {
         console.log("Invalid input detected!");
