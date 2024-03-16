@@ -39,7 +39,9 @@ function validateInput(input) {
     return "Not a Number";
 }
 
-function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
+
+//REMOVING LIST = CORRECT WEBPAGE, KEEPING LIST = 2/8 fail (IDK why)
+function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
     console.log("Received input data:");
     console.log("Pilot:", pilot);
     console.log("Co-pilot:", copilot);
@@ -108,16 +110,11 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
         document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
     }
 
-    // Check if the shuttle is ready for launch
-    if (launchStatus.textContent !== "Shuttle Not Ready for Launch") {
-        // Shuttle is ready for launch
-        launchStatus.textContent = "Shuttle is Ready for Launch";
+    // Set the color to green if the shuttle is ready for launch
+    if (launchStatus.textContent === "Shuttle is Ready for Launch") {
         launchStatus.style.color = "green";
     }
-        // Set pilot status to the correct value
-        pilotStatus = `Pilot ${pilot} is ready for launch`;
-}
-
+} 
 
 
 async function myFetch() {
