@@ -114,6 +114,8 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
         launchStatus.textContent = "Shuttle is Ready for Launch";
         launchStatus.style.color = "green";
     }
+        // Set pilot status to the correct value
+        pilotStatus = `Pilot ${pilot} is ready for launch`;
 }
 
 
