@@ -70,7 +70,7 @@ function validateInput(input) {
     return "Is a String";
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
+function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
     console.log("Received input data:");
     console.log("Pilot:", pilot);
     console.log("Co-pilot:", copilot);
