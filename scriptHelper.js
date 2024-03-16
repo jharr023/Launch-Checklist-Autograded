@@ -58,11 +58,9 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
     console.log("Fuel Status:", fuelStatus);
     console.log("Cargo Status:", cargoStatus);
 
-
     // Get the launch status and faulty items elements
     let launchStatus = document.getElementById('launchStatus');
     let faultyItems = document.getElementById('faultyItems');
-
 
     // Set visibility of faulty items to "visible"
     faultyItems.style.visibility = "visible";
@@ -92,34 +90,28 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
     } else {
         // Fuel level is sufficient for launch
         document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
-    }
 
-    // Check cargo mass
-    if (isNaN(cargoMass) || cargoMass < 0) {
-        // Shuttle not ready for launch due to invalid cargo mass
-        launchStatus.textContent = "Shuttle Not Ready for Launch";
-        launchStatus.style.color = "red";
-        document.getElementById('cargoStatus').textContent = "Cargo mass must be a valid positive number.";
-    } else if (cargoMass > 10000) {
-        // Shuttle not ready for launch due to heavy cargo
-        launchStatus.textContent = "Shuttle Not Ready for Launch";
-        launchStatus.style.color = "red";
-        document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
-    } else {
-        // Cargo mass is within acceptable limits
-        document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
-    }
+        // Check cargo mass
+        if (isNaN(cargoMass) || cargoMass < 0) {
+            // Shuttle not ready for launch due to invalid cargo mass
+            launchStatus.textContent = "Shuttle Not Ready for Launch";
+            launchStatus.style.color = "red";
+            document.getElementById('cargoStatus').textContent = "Cargo mass must be a valid positive number.";
+        } else if (cargoMass > 10000) {
+            // Shuttle not ready for launch due to heavy cargo
+            launchStatus.textContent = "Shuttle Not Ready for Launch";
+            launchStatus.style.color = "red";
+            document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
+        } else {
+            // Cargo mass is within acceptable limits
+            document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
 
-    // Check if the shuttle is ready for launch
-    if (launchStatus.textContent !== "Shuttle Not Ready for Launch") {
-        // Shuttle is ready for launch
-        launchStatus.textContent = "Shuttle is Ready for Launch";
-        launchStatus.style.color = "green";
+            // Shuttle is ready for launch
+            launchStatus.textContent = "Shuttle is Ready for Launch";
+            launchStatus.style.color = "green";
+        }
     }
 }
-
-
-
 
 
 async function myFetch() {
