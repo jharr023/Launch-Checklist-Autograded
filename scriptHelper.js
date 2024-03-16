@@ -46,13 +46,11 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
     console.log("Fuel Level:", fuelLevel);
     console.log("Cargo Mass:", cargoMass);
 
-
     // Validate input data for pilot, co-pilot, fuel, and cargo
     let pilotStatus = validateInput(pilot);
     let copilotStatus = validateInput(copilot);
     let fuelStatus = validateInput(String(fuelLevel));
     let cargoStatus = validateInput(String(cargoMass));
-
 
     console.log("Validation statuses:");
     console.log("Pilot Status:", pilotStatus);
@@ -69,19 +67,16 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
     // Set visibility of faulty items to "visible"
     faultyItems.style.visibility = "visible";
 
-
     // Check if any required fields are empty
     if (pilotStatus === "Empty" || copilotStatus === "Empty" || fuelStatus === "Empty" || cargoStatus === "Empty") {
         alert("All fields are required!");
         return;
     }
 
-
     // All inputs are valid
     // Update pilot and co-pilot status
     document.getElementById('pilotStatus').textContent = `Pilot ${pilot} is ready for launch`;
     document.getElementById('copilotStatus').textContent = `Co-pilot ${copilot} is ready for launch`;
-
 
     // Check fuel level
     if (isNaN(fuelLevel) || fuelLevel < 0) {
@@ -99,7 +94,6 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
         document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
     }
 
-
     // Check cargo mass
     if (isNaN(cargoMass) || cargoMass < 0) {
         // Shuttle not ready for launch due to invalid cargo mass
@@ -116,7 +110,6 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
         document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
     }
 
-
     // Check if the shuttle is ready for launch
     if (launchStatus.textContent !== "Shuttle Not Ready for Launch") {
         // Shuttle is ready for launch
@@ -124,6 +117,7 @@ function formSubmission(document, pilot, copilot, fuelLevel, cargoMass) {
         launchStatus.style.color = "green";
     }
 }
+
 
 
 
