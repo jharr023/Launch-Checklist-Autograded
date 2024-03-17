@@ -39,9 +39,8 @@ function validateInput(input) {
     return "Not a Number";
 }
 
-
 //REMOVING LIST = CORRECT WEBPAGE, KEEPING LIST = 2/8 fail (IDK why)
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoMass) {
+function formSubmission(document, /*list,*/ pilot, copilot, fuelLevel, cargoMass) {
     console.log("Received input data:");
     console.log("Pilot:", pilot);
     console.log("Co-pilot:", copilot);
