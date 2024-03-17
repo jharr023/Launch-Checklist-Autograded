@@ -19,7 +19,6 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     `;
 }
 
-
 function validateInput(input) {
     // Convert input to string if it's not already a string
     if (typeof input !== 'string') {
@@ -110,9 +109,10 @@ function formSubmission(document, /*list,*/ pilot, copilot, fuelLevel, cargoMass
     }
 
     // Set the color to green if the shuttle is ready for launch
-    if (launchStatus.textContent === "Shuttle is Ready for Launch") {
+    if (launchStatus.textContent !== "Shuttle Not Ready for Launch") {
         launchStatus.style.color = "green";
     }
+    launchStatus.textContent = "Shuttle is Ready for Launch";
 } 
 
 
