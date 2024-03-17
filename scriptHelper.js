@@ -3,7 +3,6 @@
 import ('cross-fetch/polyfill');
 //import ('https://cdn.jsdelivr.net/npm/cross-fetch@latest/dist/browser-polyfill.min.js');
 
-
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     const missionTargetDiv = document.getElementById('missionTarget');
     missionTargetDiv.innerHTML = `
@@ -38,7 +37,7 @@ function validateInput(input) {
     return "Not a Number";
 }
 
-//REMOVING LIST = CORRECT WEBPAGE, KEEPING LIST = 2/8 fail (IDK why)
+//REMOVING LIST = CORRECT WEBPAGE, KEEPING LIST = 2/10 fail (IDK why)
 function formSubmission(document, /*list,*/ pilot, copilot, fuelLevel, cargoMass) {
     console.log("Received input data:");
     console.log("Pilot:", pilot);
@@ -82,11 +81,14 @@ function formSubmission(document, /*list,*/ pilot, copilot, fuelLevel, cargoMass
         launchStatus.textContent = "Shuttle Not Ready for Launch";
         launchStatus.style.color = "red";
         document.getElementById('fuelStatus').textContent = "Fuel level must be a valid positive number.";
+        alert("Fuel level must be a valid positive number!");
+        
     } else if (fuelLevel < 10000) {
         // Shuttle not ready for launch due to low fuel
         launchStatus.textContent = "Shuttle Not Ready for Launch";
         launchStatus.style.color = "red";
         document.getElementById('fuelStatus').textContent = "Fuel level too low for launch";
+        alert("Fuel level must be above 10000.");
     } else {
         // Fuel level is sufficient for launch
         document.getElementById('fuelStatus').textContent = "Fuel level high enough for launch";
@@ -98,11 +100,14 @@ function formSubmission(document, /*list,*/ pilot, copilot, fuelLevel, cargoMass
         launchStatus.textContent = "Shuttle Not Ready for Launch";
         launchStatus.style.color = "red";
         document.getElementById('cargoStatus').textContent = "Cargo mass must be a valid positive number.";
+        alert("Cargo mass must be valid positive number.");
+    
     } else if (cargoMass > 10000) {
         // Shuttle not ready for launch due to heavy cargo
         launchStatus.textContent = "Shuttle Not Ready for Launch";
         launchStatus.style.color = "red";
         document.getElementById('cargoStatus').textContent = "Cargo mass too heavy for launch";
+        alert("Cargo mass must be under 10000.");
     } else {
         // Cargo mass is within acceptable limits
         document.getElementById('cargoStatus').textContent = "Cargo mass low enough for launch";
@@ -111,10 +116,10 @@ function formSubmission(document, /*list,*/ pilot, copilot, fuelLevel, cargoMass
     // Set the color to green if the shuttle is ready for launch
     if (launchStatus.textContent !== "Shuttle Not Ready for Launch") {
         launchStatus.style.color = "green";
+        launchStatus.textContent = "Shuttle is Ready for Launch";
     }
-    launchStatus.textContent = "Shuttle is Ready for Launch";
+    //launchStatus.textContent = "Shuttle is Ready for Launch";
 } 
-
 
 async function myFetch() {
     try {
